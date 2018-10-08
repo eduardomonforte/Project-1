@@ -60,3 +60,23 @@ p {
 footer.page-footer {
     margin: 0;
 }
+
+#map {
+    width: 100%;
+    height: 400px;
+    background-color: grey;
+}
+
+.picker__date-display {
+    background-color: blue;
+}
+
+.picker__weekday-display {
+    background-color: red;
+}
+
+.picker__day--selected,
+.picker__day--selected:hover,
+.picker--focused .picker__day--selected {
+    background-color: blue;
+}
