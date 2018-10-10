@@ -46,7 +46,7 @@
                             place.</h5>
                     </div>
                     <div class="row center">
-                        <a href="#events-section" id="try-now" class="btn-large waves-effect waves-light indigo lighten-1">Try
+                        <a href="#selector" id="try-now" class="btn-large waves-effect waves-light indigo lighten-1">Try
                             Now</a>
                     </div>
                     <br><br>
@@ -104,15 +104,19 @@
                 <h5>Select your favorite place and date:</h5>
                 <div class="input-field col s12 m6 l6">
                     <select>
-                        <option value="mexico" selected>México</option>
-                        <option value="monterrey">Monterrey</option>
-                        <option value="guadalajara">Guadalajara</option>
-                        <option value="ciudad de mexico">CDMX</option>
+                        <option value="" selected>All over Mexico</option>
+                        <option value="NL">Monterrey</option>
+                        <option value="JAL">Guadalajara</option>
+                        <option value="DF">CDMX</option>
                     </select>
                     <label>Place</label>
                 </div>
                 <div class="input-field col s12 m6 l6">
+<<<<<<< HEAD
                     <input type="text" class="datepicker" placeholder="Pick a date!">
+=======
+                    <input type="text" class="datepicker" placeholder="Pick a Date">
+>>>>>>> 676578c6170d7120f8b4361754bd7d888fc0a3d5
                     <label>Date</label>
                 </div>
             </div>
@@ -136,12 +140,12 @@
                 <div class="col s12 m4 l4">
                     <div class="card">
                         <div class="card-image">
-                            <img src="https://images.pexels.com/photos/196652/pexels-photo-196652.jpeg?cs=srgb&dl=people-lights-festival-196652.jpg&fm=jpg">
-                            <span class="card-title">Event 1</span>
+                            <img id="event1image" src="https://images.pexels.com/photos/196652/pexels-photo-196652.jpeg?cs=srgb&dl=people-lights-festival-196652.jpg&fm=jpg">
+                            <span id="event1title" class="card-title">Event 1</span>
                             <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
                         </div>
                         <div class="card-content">
-                            <p>I am a very simple card. I am good at containing small bits of information. I am
+                            <p id="event1description">I am a very simple card. I am good at containing small bits of information. I am
                                 convenient
                                 because I require little markup to use effectively.</p>
                         </div>
@@ -151,12 +155,12 @@
                 <div class="col s12 m4 l4">
                     <div class="card">
                         <div class="card-image">
-                            <img src="https://images.pexels.com/photos/196652/pexels-photo-196652.jpeg?cs=srgb&dl=people-lights-festival-196652.jpg&fm=jpg">
-                            <span class="card-title">Event 2</span>
+                            <img id="event2image" src="https://images.pexels.com/photos/196652/pexels-photo-196652.jpeg?cs=srgb&dl=people-lights-festival-196652.jpg&fm=jpg">
+                            <span id="event2title" class="card-title">Event 2</span>
                             <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
                         </div>
                         <div class="card-content">
-                            <p>I am a very simple card. I am good at containing small bits of information. I am
+                            <p id="event2description">I am a very simple card. I am good at containing small bits of information. I am
                                 convenient
                                 because I require little markup to use effectively.</p>
                         </div>
@@ -166,12 +170,12 @@
                 <div class="col s12 m4 l4">
                     <div class="card">
                         <div class="card-image">
-                            <img src="https://images.pexels.com/photos/196652/pexels-photo-196652.jpeg?cs=srgb&dl=people-lights-festival-196652.jpg&fm=jpg">
-                            <span class="card-title">Event 2</span>
+                            <img id="event3image" src="https://images.pexels.com/photos/196652/pexels-photo-196652.jpeg?cs=srgb&dl=people-lights-festival-196652.jpg&fm=jpg">
+                            <span id="event3title" class="card-title">Event 2</span>
                             <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
                         </div>
                         <div class="card-content">
-                            <p>I am a very simple card. I am good at containing small bits of information. I am
+                            <p id="event3description">I am a very simple card. I am good at containing small bits of information. I am
                                 convenient
                                 because I require little markup to use effectively.</p>
                         </div>
@@ -254,6 +258,7 @@
 <!-- Frameworks -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="assets/javascript/ticketmaster-api.js"></script>
 <script src="assets/javascript/materialize.js"></script>
 <script src="assets/javascript/init.js"></script>
 
