@@ -2,16 +2,16 @@
 <html lang="en">
 
 <head>
-    <title>Project 1</title>
+    <title>Roadtrip MX</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <link href="assets/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="assets/css/style.css" type="text/css" rel="stylesheet" >
 
 </head>
 
@@ -22,15 +22,12 @@
                 <a id="logo-container" href="#" class="brand-logo">Roadtrip MX</a>
                 <ul class="right hide-on-med-and-down">
                     <li class="active"><a href="index.html">Event Search</a></li>
-                    <li><a href="instructions.html">Instructions</a></li>
-                    <li><a href="contact.html">Contact</a></li>
                 </ul>
 
                 <ul id="nav-mobile" class="sidenav">
                     <li class="active"><a href="index.html">Event Search</a></li>
-                    <li><a href="instructions.html">Instructions</a></li>
-                    <li><a href="contact.html">Contact</a></li>
                 </ul>
+
                 <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             </div>
         </nav>
@@ -40,71 +37,29 @@
             <div class="section no-pad-bot">
                 <div class="container">
                     <br><br>
-                    <h1 class="header center indigo-lighten5-text text-lighten-2">Search for Events</h1>
+                    <h1 class="header center indigo-lighten5-text text-lighten-2">Get on the Road</h1>
                     <div class="row center">
-                        <h5 class="header col s12 light">A modern way to reach your favorite artist, all in one
-                            place.</h5>
+                        <h5 class="header col s12 light">Plan your next roadtrip, all in one place.</h5>
                     </div>
                     <div class="row center">
-                        <a href="#selector" id="try-now" class="btn-large waves-effect waves-light indigo lighten-1">Try
-                            Now</a>
+                        <a href="#selector" id="try-now" class="btn-large waves-effect waves-light indigo lighten-1">Let's
+                            Go!</a>
                     </div>
                     <br><br>
                 </div>
             </div>
-            <div class="parallax"><img src="assets/images/event3.jpg" alt="Unsplashed background img 1"></div>
+            <div class="parallax"><img src="assets/images/event-header.jpg" alt="Unsplashed background img 1"></div>
         </div>
 
-        <!-- <div class="container">
-            <div class="section">
-
-                <div class="row">
-                    <div class="col s12 m4">
-                        <div class="icon-block">
-                            <h2 class="center indigo-text"><i class="material-icons">flash_on</i></h2>
-                            <h5 class="center">Speeds up development</h5>
-
-                            <p class="light">We did most of the heavy lifting for you to provide a default stylings
-                                that incorporate our custom components. Additionally, we refined animations and
-                                transitions to provide a smoother experience for developers.</p>
-                        </div>
-                    </div>
-
-                    <div class="col s12 m4">
-                        <div class="icon-block">
-                            <h2 class="center indigo-text"><i class="material-icons">group</i></h2>
-                            <h5 class="center">User Experience Focused</h5>
-
-                            <p class="light">By utilizing elements and principles of Material Design, we were able to
-                                create a framework that incorporates components and animations that provide more
-                                feedback to users. Additionally, a single underlying responsive system across all
-                                platforms allow for a more unified user experience.</p>
-                        </div>
-                    </div>
-
-                    <div class="col s12 m4">
-                        <div class="icon-block">
-                            <h2 class="center indigo-text"><i class="material-icons">settings</i></h2>
-                            <h5 class="center">Easy to work with</h5>
-
-                            <p class="light">We have provided detailed documentation as well as specific code examples
-                                to help new users get started. We are also always open to feedback and can answer any
-                                questions a user may have about Materialize.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
         <br>
-        <!-- Div Element for Date and Place Selector -->
+        <!-- DIV Element for Date and Place Selector -->
         <div class="container" id="selector">
             <!--Input Fields ROW -->
             <div class="row">
-                <h5>Select your favorite place and date:</h5>
+                <h5>Select your desired destination and event date:</h5>
                 <div class="input-field col s12 m6 l6">
                     <select>
-                        <option value="" selected>All over Mexico</option>
+                        <option value="" selected>Mexico</option>
                         <option value="NL">Monterrey</option>
                         <option value="JAL">Guadalajara</option>
                         <option value="DF">CDMX</option>
@@ -125,18 +80,21 @@
             </div>
         </div>
 
-        <!--Div Element for the MAP -->
+        <!--DIV Element for the Map -->
         <div class="container">
             <div id="map"></div>
         </div>
         <br>
-        <!--Div Element for Event Listings -->
+
+        <!--DIV Element for the Events -->
         <div class="container" id="events-section">
             <div class="row">
+
+                <!-- Event 1 Card -->
                 <div class="col s12 m4 l4">
                     <div class="card">
                         <div class="card-image">
-                            <img id="event1image" src="https://images.pexels.com/photos/196652/pexels-photo-196652.jpeg?cs=srgb&dl=people-lights-festival-196652.jpg&fm=jpg">
+                            <img height="175px" width="100%" id="event1image" src="assets/images/event-card.jpg">
                             <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
                         </div>
                         <div class="card-content">
@@ -150,10 +108,11 @@
                     </div>
                 </div>
 
+                <!-- Event 2 Card -->
                 <div class="col s12 m4 l4">
                     <div class="card">
                         <div class="card-image">
-                            <img id="event2image" src="https://images.pexels.com/photos/196652/pexels-photo-196652.jpeg?cs=srgb&dl=people-lights-festival-196652.jpg&fm=jpg">
+                            <img height="175px" width="100%" id="event2image" src="assets/images/event-card.jpg">
                             <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
                         </div>
                         <div class="card-content">
@@ -167,10 +126,11 @@
                     </div>
                 </div>
 
+                <!-- Event 3 Card -->
                 <div class="col s12 m4 l4">
                     <div class="card">
                         <div class="card-image">
-                            <img id="event3image" src="https://images.pexels.com/photos/196652/pexels-photo-196652.jpeg?cs=srgb&dl=people-lights-festival-196652.jpg&fm=jpg">
+                            <img height="175px" width="100%" id="event3image" src="assets/images/event-card.jpg">
                             <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
                         </div>
                         <div class="card-content">
@@ -185,51 +145,19 @@
                 </div>
             </div>
         </div>
-        <div class="container">
-            <div class="section">
-                <div class="row">
-                    <div class="col s12 m12 l12 center">
-                        <h3><i class="mdi-content-send brown-text"></i></h3>
-                        <h4>Contact Us</h4>
-                        <p class="left-align light">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Nullam
-                            scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna
-                            fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra
-                            ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus.
-                            Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper
-                            molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget
-                            dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus
-                            et ultrices posuere cubilia Curae;</p>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-
-        <!-- <div class="parallax-container valign-wrapper">
-            <div class="section no-pad-bot">
-                <div class="container">
-                    <div class="row center">
-                        <h5 class="header col s12 light">A modern responsive front-end framework based on Material
-                            Design</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="parallax"><img src="assets/images/background3.jpg" alt="Unsplashed background img 3"></div>
-        </div> -->
     </main>
     <footer class="page-footer indigo">
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
-                    <h5 class="white-text">Our Goal</h5>
+                    <h5 class="white-text">Contact Us</h5>
                     <p class="grey-text text-lighten-4">We are a team of Boot Camp students working on this project
-                        like
-                        it's our full time job. Any amount would help support and continue development on this project
-                        and is greatly appreciated.</p>
+                    like it's our full time job. You can find us both on GitHub, or check out the other stuff we've
+                    built.</p>
                 </div>
                 <div class="col l3 s12">
-                    <h5 class="white-text">Settings</h5>
+                    <h5 class="white-text">More by Adrián</h5>
                     <ul>
                         <li><a class="white-text" href="#!">Link 1</a></li>
                         <li><a class="white-text" href="#!">Link 2</a></li>
@@ -238,7 +166,7 @@
                     </ul>
                 </div>
                 <div class="col l3 s12">
-                    <h5 class="white-text">Connect</h5>
+                    <h5 class="white-text">More by Eduardo</h5>
                     <ul>
                         <li><a class="white-text" href="#!">Link 1</a></li>
                         <li><a class="white-text" href="#!">Link 2</a></li>
@@ -250,7 +178,7 @@
         </div>
         <div class="footer-copyright">
             <div class="container">
-                Made by Adrián, Eduardo & Carlos
+                Made by Adrián & Eduardo
             </div>
         </div>
     </footer>
@@ -260,16 +188,16 @@
 <!-- Frameworks -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="assets/javascript/ticketmaster-api.js"></script>
 <script src="assets/javascript/materialize.js"></script>
+<!-- -->
 <script src="assets/javascript/init.js"></script>
+<!-- Smooth scrolling and collapsible items -->
 <script src="assets/javascript/app.js"></script>
-
 <!-- Initialize Firebase -->
 <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase.js"></script>
-
 <!-- Google Maps Script -->
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwwLDW0ENNoWUrNbs0nrYv2RNTx5AVJh4&callback=initMap"></script>
-<script src="assets/javascript/googleMaps.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwwLDW0ENNoWUrNbs0nrYv2RNTx5AVJh4&callback=start"></script>
+<!-- Main JS file with all the APIs; previously googleMaps.js -->
+<script type="text/javascript" src="assets/javascript/main.js"></script>
 
 </html>

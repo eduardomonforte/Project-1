@@ -5016,6 +5016,13 @@ small {
   overflow: hidden;
 }
 
+/* ADDED BY THE TEAM */
+
+.card-content {
+  height: 200px !important;
+  overflow: hidden !important;
+}
+
 .card.small .card-action,
 .card.medium .card-action,
 .card.large .card-action {
