@@ -1,4 +1,4 @@
-//Initialize Firebase
+// Initialize Firebase
 var config = {
     apiKey: "AIzaSyAnPqkMczUMOzd77nUc-UquvnE5RiRew9Q",
     authDomain: "cbc-project-1.firebaseapp.com",
@@ -9,21 +9,23 @@ var config = {
 };
 firebase.initializeApp(config);
 
-//INEGI Variables
+// INEGI Variables
 var city = "";
 var startTrip = 0;
 var endTrip = 0;
 
-// Coordinate Variables
+// Coordinate Arrays, to be populated by the Ticketmaster Discovery API
 var eventsLatitude = [];
 var eventsLongitude = [];
 
-// TICKETMASTER
+// TICKETMASTER DISCOVERY API
 
 var responseSize = (3).toString()
 var apiKey = "8qqzR9xAATp2Wyh7mCELVegociPYsEVT"
 
-var queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=" + apiKey + "&countryCode=MX&size=" + responseSize
+var queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=" + apiKey + "&countryCode=MX&size=" + responseSize + "&sort=date,asc"
+
+function start() {
 
 $.ajax({
     url: queryURL,
@@ -50,16 +52,20 @@ $.ajax({
 
     for (i = 0; i < defaultEvents.length; i++) {
 
-        defaultEventsLatitude = defaultEvents[i]._embedded.venues[0].location.latitude;
+        defaultEventsLatitude = parseFloat(defaultEvents[i]._embedded.venues[0].location.latitude);
         eventsLatitude.push(defaultEventsLatitude);
-        defaultEventsLongitude = defaultEvents[i]._embedded.venues[0].location.longitude;
+        defaultEventsLongitude = parseFloat(defaultEvents[i]._embedded.venues[0].location.longitude);
         eventsLongitude.push(defaultEventsLongitude);
 
     }
 
+    initMap();
+
 });
 
-//Function to determine the place and INEGI code for the routing function
+};
+
+// Function to determine the place and INEGI code for the routing function
 function journeyStart(city) {
 
     $.ajax({
@@ -79,7 +85,7 @@ function journeyStart(city) {
     });
 }
 
-//Function to determine the complete route, km, toll cost, etc.
+// Function to determine the complete route, km, toll cost, etc.
 function routes(startTrip, endTrip) {
     $.ajax({
         url: "http://gaia.inegi.org.mx/sakbe_v3.1/cuota",
@@ -106,7 +112,7 @@ function routes(startTrip, endTrip) {
     });
 }
 
-//Function to determine fuel costs.
+// Function to determine fuel costs
 function fuel() {
     $.ajax({
         url: "http://gaia.inegi.org.mx/sakbe_v3.1/combustible",
@@ -124,9 +130,9 @@ function fuel() {
     });
 }
 
-// Initialize and add the map
+// Function to initialize and add the map
 function initMap() {
-    // The location of Mexico
+    // The location of the center of Mexico
     var mexico = {
         lat: 23.6345,
         lng: -102.5528,
@@ -159,12 +165,6 @@ function initMap() {
             center: mexico
         });
 
-    // Test Marker
-    var marker = new google.maps.Marker({
-        position: mexico,
-        map: map
-    });
-
     // Marker for Event 1
     var markerEvent1 = new google.maps.Marker({
         position: event1location,
@@ -183,8 +183,6 @@ function initMap() {
         map: map
     });
 }
-
-initMap();
 
 function displayRoute() {
     // The location of Mexico
