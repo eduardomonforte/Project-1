@@ -2,6 +2,7 @@ $(document).ready(function () {
     // Add smooth scrolling to all links
     $("#try-now").on('click', function (event) {
 
+        console.log("Pressed 'Try now'");
         // Make sure this.hash has a value before overriding default behavior
         if (this.hash !== "") {
             // Prevent default anchor click behavior
@@ -21,4 +22,9 @@ $(document).ready(function () {
             });
         } // End if
     });
+
+    // NEW
+
+    $('.collapsible').collapsible();
+
 });
