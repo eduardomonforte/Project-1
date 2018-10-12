@@ -14,6 +14,51 @@ var city = "";
 var startTrip = 0;
 var endTrip = 0;
 
+// Coordinate Variables
+var eventsLatitude = [];
+var eventsLongitude = [];
+
+// TICKETMASTER
+
+var responseSize = (3).toString()
+var apiKey = "8qqzR9xAATp2Wyh7mCELVegociPYsEVT"
+
+var queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=" + apiKey + "&countryCode=MX&size=" + responseSize
+
+$.ajax({
+    url: queryURL,
+    method: "GET"
+}).then(function(response) {
+
+    console.log(response);
+
+    var defaultEvents = response._embedded.events
+
+    console.log(defaultEvents);
+
+    $("#event1image").attr("src", defaultEvents[0].images[0].url);
+    $("#event1title").text(defaultEvents[0].name);
+    $("#event1description").text(defaultEvents[0].info)
+
+    $("#event2image").attr("src", defaultEvents[1].images[0].url);
+    $("#event2title").text(defaultEvents[1].name);
+    $("#event2description").text(defaultEvents[1].info)
+
+    $("#event3image").attr("src", defaultEvents[2].images[0].url);
+    $("#event3title").text(defaultEvents[2].name);
+    $("#event3description").text(defaultEvents[2].info)
+
+    for (i = 0; i < defaultEvents.length; i++) {
+
+        defaultEventsLatitude = defaultEvents[i]._embedded.venues[0].location.latitude;
+        eventsLatitude.push(defaultEventsLatitude);
+        defaultEventsLongitude = defaultEvents[i]._embedded.venues[0].location.longitude;
+        eventsLongitude.push(defaultEventsLongitude);
+
+    }
+
+});
+
 //Function to determine the place and INEGI code for the routing function
 function journeyStart(city) {
 
@@ -83,34 +128,58 @@ function fuel() {
 function initMap() {
     // The location of Mexico
     var mexico = {
-        lat: 19.3390515900001,
-        lng: -99.06427109
-
-        //23.368116,
-        //-102.268791
+        lat: 23.6345,
+        lng: -102.5528,
     };
 
-    var mexico2 = {
-        lat: 20.3390515900001,
-        lng: -102.06427109
+    // The three default event markers, empty by default.
 
-        //23.368116,
-        //-102.268791
+    var event1location = {
+        lat: eventsLatitude[0],
+        lng: eventsLongitude[0],
+        title: "Event 1",
     };
+
+    var event2location = {
+        lat: eventsLatitude[1],
+        lng: eventsLongitude[1],
+        title: "Event 2",
+    };
+
+    var event3location = {
+        lat: eventsLatitude[2],
+        lng: eventsLongitude[2],
+        title: "Event 3",
+    };
+
     // The map, centered at Mexico
     var map = new google.maps.Map(
         document.getElementById('map'), {
             zoom: 5,
             center: mexico
         });
-    // The marker, positioned at Mexico
+
+    // Test Marker
     var marker = new google.maps.Marker({
         position: mexico,
         map: map
     });
 
-    var marker2 = new google.maps.Marker({
-        position: mexico2,
+    // Marker for Event 1
+    var markerEvent1 = new google.maps.Marker({
+        position: event1location,
+        map: map
+    });
+
+    // Marker for Event 2
+    var markerEvent2 = new google.maps.Marker({
+        position: event2location,
+        map: map
+    });
+
+    // Marker for Event 3
+    var markerEvent3 = new google.maps.Marker({
+        position: event3location,
         map: map
     });
 }
