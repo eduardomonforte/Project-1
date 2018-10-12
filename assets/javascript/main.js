@@ -32,8 +32,6 @@ $.ajax({
     method: "GET"
 }).then(function(response) {
 
-    console.log(response);
-
     var defaultEvents = response._embedded.events
 
     console.log(defaultEvents);
