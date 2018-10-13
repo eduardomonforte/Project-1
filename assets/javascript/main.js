@@ -225,3 +225,21 @@ function displayRoute() {
         map: map
     });
 }
+
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "https://dev.allmyles.com/v2.0/hotels",
+    "method": "POST",
+    "headers": {
+      "X-Auth-Token": "4bc1353d-2727",
+      "Cookie": "{{session_id}}",
+      "Content-Type": "application/json",
+    },
+    "processData": false,
+    "data": "{\n  \"cityCode\": \"MEX\",\n  \"rooms\": [\n    {\n      \"ADT\": 1\n    }\n  ],\n  \"arrivalDate\": \"2018-11-22\",\n  \"leaveDate\": \"2018-11-23\",\n  \"nationality\": \"MX\"\n}\n"
+  }
+
+  $.ajax(settings).done(function (response) {
+    console.log(response);
+  });
