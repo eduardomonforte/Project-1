@@ -20,7 +20,7 @@ var eventsLongitude = [];
 
 // TICKETMASTER DISCOVERY API
 
-var responseSize = (3).toString()
+var responseSize = (20).toString()
 var apiKey = "8qqzR9xAATp2Wyh7mCELVegociPYsEVT"
 
 var queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=" + apiKey + "&countryCode=MX&size=" + responseSize + "&sort=date,asc"
@@ -32,7 +32,16 @@ $.ajax({
     method: "GET"
 }).then(function(response) {
 
-    var defaultEvents = response._embedded.events
+    var defaultEvents = [];
+    var tempEvent = response._embedded.events
+
+    for (let i = 0; i < tempEvent.length; i++) {
+
+        if (tempEvent[i]._embedded.venues[0].location !== undefined) {
+            defaultEvents.push(tempEvent[i]);
+        }
+
+    }
 
     console.log(defaultEvents);
 
@@ -48,7 +57,7 @@ $.ajax({
     $("#event3title").text(defaultEvents[2].name);
     $("#event3description").text(defaultEvents[2].info)
 
-    for (i = 0; i < defaultEvents.length; i++) {
+    for (let i = 0; i < defaultEvents.length; i++) {
 
         defaultEventsLatitude = parseFloat(defaultEvents[i]._embedded.venues[0].location.latitude);
         eventsLatitude.push(defaultEventsLatitude);
