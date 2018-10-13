@@ -71,8 +71,6 @@ $.ajax({
     $(".event3venue").text(defaultEvents[2]._embedded.venues[0].name + " - " + defaultEvents[2]._embedded.venues[0].city.name + ", " + defaultEvents[2]._embedded.venues[0].country.name)
     $(".event3price").text("Ticket price (min): $" + defaultEvents[2].priceRanges[0].min + " MXN")
 
-
-
     for (let i = 0; i < defaultEvents.length; i++) {
 
         defaultEventsLatitude = parseFloat(defaultEvents[i]._embedded.venues[0].location.latitude);
