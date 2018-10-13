@@ -44,8 +44,13 @@ $(document).ready(function () {
 
   $(function () {
     $("#go-search").on('click', function () {
-      var startPoint = $("#start").val();
+
+      var startPoint = $('#start').find(":selected").attr("data-inegi");
+      var endPoint = $('#end').find(":selected").attr("data-inegi");
       console.log(startPoint);
+      console.log(endPoint);
+      routes(startPoint, endPoint);
+
     });
 
 

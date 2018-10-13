@@ -5023,6 +5023,17 @@ small {
   overflow: hidden !important;
 }
 
+#hotelsArea {
+  height: 380px !important;
+  overflow: hidden !important;
+}
+
+#finalArea {
+  height: 380px !important;
+  overflow: hidden !important;
+}
+
+
 .card.small .card-action,
 .card.medium .card-action,
 .card.large .card-action {
