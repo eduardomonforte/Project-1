@@ -65,9 +65,11 @@ function searchTicketmaster() {
     "&sort=date,asc" +
     "&startDateTime=" +
     ticketmasterDate +
-    "T00:00:00Z"; +
+    "T00:00:00Z" +
   "&stateCode=" +
   stateCode;
+
+    console.log(queryURL2);
 
   $.ajax({
     url: queryURL2,
@@ -85,6 +87,7 @@ function searchTicketmaster() {
         defaultEvents.push(tempEvent[i]);
       }
     }
+    console.log(defaultEvents);
   })
 
 }
@@ -194,7 +197,7 @@ function start() {
 // Function to determine the place and INEGI code for the routing function
 function journeyStart(city) {
   $.ajax({
-    url: "http://gaia.inegi.org.mx/sakbe_v3.1/buscadestino",
+    url: "https://pacific-wave-84052.herokuapp.com/buscadestino",
     method: "POST",
     data: {
       buscar: city,
@@ -211,7 +214,7 @@ function journeyStart(city) {
 // Function to determine the complete route, km, toll cost, etc.
 function routes(startTrip, endTrip) {
   $.ajax({
-    url: "http://gaia.inegi.org.mx/sakbe_v3.1/cuota",
+    url: "https://pacific-wave-84052.herokuapp.com/cuota",
     method: "POST",
     data: {
       key: "rZMkTZuI-ugbU-t1Y5-zCHg-0ZOETYT3r0HG",
@@ -237,7 +240,7 @@ function routes(startTrip, endTrip) {
 // Function to determine fuel costs
 function fuel() {
   $.ajax({
-    url: "http://gaia.inegi.org.mx/sakbe_v3.1/combustible",
+    url: "https://pacific-wave-84052.herokuapp.com/combustible",
     method: "POST",
     data: {
       key: "rZMkTZuI-ugbU-t1Y5-zCHg-0ZOETYT3r0HG",
