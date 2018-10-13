@@ -37,7 +37,7 @@ $.ajax({
 
     for (let i = 0; i < tempEvent.length; i++) {
 
-        if (tempEvent[i]._embedded.venues[0].location !== undefined) {
+        if (tempEvent[i]._embedded.venues[0].location !== undefined && tempEvent[i].info !== undefined) {
             defaultEvents.push(tempEvent[i]);
         }
 
@@ -48,14 +48,23 @@ $.ajax({
     $("#event1image").attr("src", defaultEvents[0].images[0].url);
     $(".event1title").text(defaultEvents[0].name);
     $("#event1description").text(defaultEvents[0].info)
+    $(".event1venue").text(defaultEvents[0]._embedded.venues[0].name + " - " + defaultEvents[0]._embedded.venues[0].city.name + ", " + defaultEvents[0]._embedded.venues[0].country.name)
+    $(".event1price").text("Ticket price (min): $" + defaultEvents[0].priceRanges[0].min + " MXN")
+
 
     $("#event2image").attr("src", defaultEvents[1].images[0].url);
     $(".event2title").text(defaultEvents[1].name);
     $("#event2description").text(defaultEvents[1].info)
+    $(".event2venue").text(defaultEvents[1]._embedded.venues[0].name + " - " + defaultEvents[1]._embedded.venues[0].city.name + ", " + defaultEvents[1]._embedded.venues[0].country.name)
+    $(".event2price").text("Ticket price (min): $" + defaultEvents[1].priceRanges[0].min + " MXN")
 
     $("#event3image").attr("src", defaultEvents[2].images[0].url);
     $(".event3title").text(defaultEvents[2].name);
     $("#event3description").text(defaultEvents[2].info)
+    $(".event3venue").text(defaultEvents[2]._embedded.venues[0].name + " - " + defaultEvents[2]._embedded.venues[0].city.name + ", " + defaultEvents[2]._embedded.venues[0].country.name)
+    $(".event3price").text("Ticket price (min): $" + defaultEvents[2].priceRanges[0].min + " MXN")
+
+
 
     for (let i = 0; i < defaultEvents.length; i++) {
 
@@ -225,21 +234,3 @@ function displayRoute() {
         map: map
     });
 }
-
-var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "https://dev.allmyles.com/v2.0/hotels",
-    "method": "POST",
-    "headers": {
-      "X-Auth-Token": "4bc1353d-2727",
-      "Cookie": "{{session_id}}",
-      "Content-Type": "application/json",
-    },
-    "processData": false,
-    "data": "{\n  \"cityCode\": \"MEX\",\n  \"rooms\": [\n    {\n      \"ADT\": 1\n    }\n  ],\n  \"arrivalDate\": \"2018-11-22\",\n  \"leaveDate\": \"2018-11-23\",\n  \"nationality\": \"MX\"\n}\n"
-  }
-
-  $.ajax(settings).done(function (response) {
-    console.log(response);
-  });
