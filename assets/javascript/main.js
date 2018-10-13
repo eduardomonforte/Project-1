@@ -548,7 +548,7 @@ $(document).on("click", "#hotel", function () {
   var convert = costodetodo.toString();
   var revert = parseInt(convert, 10);
 
-  var personExpense = revert / amountOfPeople;
+  var personExpense = (revert / amountOfPeople).toFixed(2);
 
   var personCost = $("<a>")
     .attr("class", "collection-item")
