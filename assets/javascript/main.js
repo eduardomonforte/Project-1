@@ -25,6 +25,10 @@ var apiKey = "8qqzR9xAATp2Wyh7mCELVegociPYsEVT"
 
 var queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=" + apiKey + "&countryCode=MX&size=" + responseSize + "&sort=date,asc"
 
+var titleEvent1 = ""
+var titleEvent2 = ""
+var titleEvent3 = ""
+
 function start() {
 
 $.ajax({
@@ -47,6 +51,7 @@ $.ajax({
 
     $("#event1image").attr("src", defaultEvents[0].images[0].url);
     $(".event1title").text(defaultEvents[0].name);
+    titleEvent1 = defaultEvents[0].name;
     $("#event1description").text(defaultEvents[0].info)
     $(".event1venue").text(defaultEvents[0]._embedded.venues[0].name + " - " + defaultEvents[0]._embedded.venues[0].city.name + ", " + defaultEvents[0]._embedded.venues[0].country.name)
     $(".event1price").text("Ticket price (min): $" + defaultEvents[0].priceRanges[0].min + " MXN")
@@ -54,12 +59,14 @@ $.ajax({
 
     $("#event2image").attr("src", defaultEvents[1].images[0].url);
     $(".event2title").text(defaultEvents[1].name);
+    titleEvent2 = defaultEvents[1].name;
     $("#event2description").text(defaultEvents[1].info)
     $(".event2venue").text(defaultEvents[1]._embedded.venues[0].name + " - " + defaultEvents[1]._embedded.venues[0].city.name + ", " + defaultEvents[1]._embedded.venues[0].country.name)
     $(".event2price").text("Ticket price (min): $" + defaultEvents[1].priceRanges[0].min + " MXN")
 
     $("#event3image").attr("src", defaultEvents[2].images[0].url);
     $(".event3title").text(defaultEvents[2].name);
+    titleEvent3 = defaultEvents[2].name;
     $("#event3description").text(defaultEvents[2].info)
     $(".event3venue").text(defaultEvents[2]._embedded.venues[0].name + " - " + defaultEvents[2]._embedded.venues[0].city.name + ", " + defaultEvents[2]._embedded.venues[0].country.name)
     $(".event3price").text("Ticket price (min): $" + defaultEvents[2].priceRanges[0].min + " MXN")
@@ -148,11 +155,30 @@ function fuel() {
 
 // Function to initialize and add the map
 function initMap() {
+
+    var directionsService = new google.maps.DirectionsService;
+    var directionsDisplay = new google.maps.DirectionsRenderer;
+
     // The location of the center of Mexico
     var mexico = {
         lat: 23.6345,
         lng: -102.5528,
     };
+
+    // The map, centered at Mexico
+    var map = new google.maps.Map(
+        document.getElementById('map'), {
+            zoom: 5,
+            center: mexico
+    });
+
+    directionsDisplay.setMap(map);
+
+    var onChangeHandler = function() {
+        calculateAndDisplayRoute(directionsService, directionsDisplay);
+      };
+      document.getElementById('start').addEventListener('change', onChangeHandler);
+      document.getElementById('end').addEventListener('change', onChangeHandler);
 
     // The three default event markers, empty by default.
 
@@ -174,17 +200,23 @@ function initMap() {
         title: "Event 3",
     };
 
-    // The map, centered at Mexico
-    var map = new google.maps.Map(
-        document.getElementById('map'), {
-            zoom: 5,
-            center: mexico
-        });
-
     // Marker for Event 1
     var markerEvent1 = new google.maps.Marker({
         position: event1location,
         map: map
+    });
+
+    var contentString1 = '<div id="content">'+
+    '<div id="siteNotice">'+
+    '</div>'+
+    '<h6 id="firstHeading" class="firstHeading">'+ titleEvent1 +'</h6>'
+
+    var infowindow1 = new google.maps.InfoWindow({
+        content: contentString1
+    });
+
+    markerEvent1.addListener('click', function() {
+        infowindow1.open(map, markerEvent1);
     });
 
     // Marker for Event 2
@@ -193,10 +225,51 @@ function initMap() {
         map: map
     });
 
+    var contentString2 = '<div id="content">'+
+    '<div id="siteNotice">'+
+    '</div>'+
+    '<h6 id="firstHeading" class="firstHeading">'+ titleEvent2 +'</h6>'
+
+    var infowindow2 = new google.maps.InfoWindow({
+        content: contentString2
+    });
+
+    markerEvent2.addListener('click', function() {
+        infowindow2.open(map, markerEvent2);
+    });
+
     // Marker for Event 3
     var markerEvent3 = new google.maps.Marker({
         position: event3location,
         map: map
+    });
+
+    var contentString3 = '<div id="content">'+
+    '<div id="siteNotice">'+
+    '</div>'+
+    '<h6 id="firstHeading" class="firstHeading">'+ titleEvent3 +'</h6>'
+
+    var infowindow3 = new google.maps.InfoWindow({
+        content: contentString3
+    });
+
+    markerEvent3.addListener('click', function() {
+        infowindow3.open(map, markerEvent3);
+    });
+
+}
+
+function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+    directionsService.route({
+      origin: document.getElementById('start').value,
+      destination: document.getElementById('end').value,
+      travelMode: 'DRIVING'
+    }, function(response, status) {
+      if (status === 'OK') {
+        directionsDisplay.setDirections(response);
+      } else {
+        window.alert('Directions request failed due to ' + status);
+      }
     });
 }
 
