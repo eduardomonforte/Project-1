@@ -13,6 +13,9 @@ firebase.initializeApp(config);
 var city = "";
 var startTrip = 0;
 var endTrip = 0;
+var responseInegi = {};
+var eventCost = 0;
+var hotelCost1 = 0;
 
 // MOMENT.JS TEST
 
@@ -26,31 +29,35 @@ var endTrip = 0;
 var ticketmasterDate = ""
 var stateCode = "DF"
 
-$("#add-user").on("click", function() {
-    var startLocation = $("#start").val();
-    alert(startLocation);
-    var endLocation = $("#end").val();
-    alert(endLocation);
-    var inputDate = $("#travel-date").val();
-    alert(inputDate);
-    var inputFormat = "MMM DD, YYYY"
-    var convertedDate = moment(inputDate, inputFormat);
-    var tempTicketmasterDate = moment(convertedDate).format("YYYY-MM-DD");
-    console.log(tempTicketmasterDate);
-    ticketmasterDate = tempTicketmasterDate;
-    var formattedDate = tempTicketmasterDate.replace(/-/g, '/');
-    console.log(formattedDate);
-    var peopleTraveling = $("#people-traveling").val();
-    alert(peopleTraveling);
-
-    searchTicketmaster();
-})
+$("#go-search").on("click", function () {
+  var startLocation = $("#start").val();
+  console.log(startLocation);
+  var endLocation = $("#end").val();
+  console.log(endLocation);
+  var inputDate = $("#travel-date").val();
+  console.log(inputDate);
+  var inputFormat = "MMM DD, YYYY";
+  var convertedDate = moment(inputDate, inputFormat);
+  var tempTicketmasterDate = moment(convertedDate).format("YYYY-MM-DD");
+  console.log(tempTicketmasterDate);
+  ticketmasterDate = tempTicketmasterDate;
+  var formattedDate = tempTicketmasterDate.replace(/-/g, '/');
+  console.log(formattedDate);
+  var peopleTraveling = $("#people-traveling").val();
+  console.log(peopleTraveling);
+  var hotelLocation = $('#end').find(":selected").attr("id");
+  console.log(hotelLocation);
+  var hotelSearch = "'" + hotelLocation + "'";
+  console.log(hotelSearch);
+  searchTicketmaster();
+  hotels("MEX", "2018-11-13", "2018-11-14");
+});
 
 function searchTicketmaster() {
-    var responseSize = (20).toString();
-    var apiKey = "8qqzR9xAATp2Wyh7mCELVegociPYsEVT";
+  var responseSize = (20).toString();
+  var apiKey = "8qqzR9xAATp2Wyh7mCELVegociPYsEVT";
 
-    var queryURL2 =
+  var queryURL2 =
     "https://app.ticketmaster.com/discovery/v2/events.json?apikey=" +
     apiKey +
     "&countryCode=MX&size=" +
@@ -59,8 +66,8 @@ function searchTicketmaster() {
     "&startDateTime=" +
     ticketmasterDate +
     "T00:00:00Z"; +
-    "&stateCode=" +
-    stateCode;
+  "&stateCode=" +
+  stateCode;
 
   $.ajax({
     url: queryURL2,
@@ -178,6 +185,8 @@ function start() {
       eventsLongitude.push(defaultEventsLongitude);
     }
 
+    eventCost = defaultEvents[0].priceRanges[0].min;
+
     initMap();
   });
 }
@@ -220,6 +229,8 @@ function routes(startTrip, endTrip) {
     }
   }).done(function (response) {
     console.log(response);
+    responseInegi = response;
+    console.log(responseInegi);
   });
 }
 
@@ -242,121 +253,121 @@ function fuel() {
 function initMap() {
 
 
-    var directionsService = new google.maps.DirectionsService;
-    var directionsDisplay = new google.maps.DirectionsRenderer;
+  var directionsService = new google.maps.DirectionsService;
+  var directionsDisplay = new google.maps.DirectionsRenderer;
 
-    // The location of the center of Mexico
-    var mexico = {
-        lat: 23.6345,
-        lng: -102.5528,
-    };
+  // The location of the center of Mexico
+  var mexico = {
+    lat: 23.6345,
+    lng: -102.5528,
+  };
 
-    // The map, centered at Mexico
-    var map = new google.maps.Map(
-        document.getElementById('map'), {
-            zoom: 5,
-            center: mexico
+  // The map, centered at Mexico
+  var map = new google.maps.Map(
+    document.getElementById('map'), {
+      zoom: 5,
+      center: mexico
     });
 
-    directionsDisplay.setMap(map);
+  directionsDisplay.setMap(map);
 
-    var onChangeHandler = function() {
-        calculateAndDisplayRoute(directionsService, directionsDisplay);
-      };
-      document.getElementById('start').addEventListener('change', onChangeHandler);
-      document.getElementById('end').addEventListener('change', onChangeHandler);
+  var onChangeHandler = function () {
+    calculateAndDisplayRoute(directionsService, directionsDisplay);
+  };
+  document.getElementById('start').addEventListener('change', onChangeHandler);
+  document.getElementById('end').addEventListener('change', onChangeHandler);
 
-    // The three default event markers, empty by default.
+  // The three default event markers, empty by default.
 
-    var event1location = {
-        lat: eventsLatitude[0],
-        lng: eventsLongitude[0],
-        title: "Event 1",
-    };
+  var event1location = {
+    lat: eventsLatitude[0],
+    lng: eventsLongitude[0],
+    title: "Event 1",
+  };
 
-    var event2location = {
-        lat: eventsLatitude[1],
-        lng: eventsLongitude[1],
-        title: "Event 2",
-    };
+  var event2location = {
+    lat: eventsLatitude[1],
+    lng: eventsLongitude[1],
+    title: "Event 2",
+  };
 
-    var event3location = {
-        lat: eventsLatitude[2],
-        lng: eventsLongitude[2],
-        title: "Event 3",
-    };
+  var event3location = {
+    lat: eventsLatitude[2],
+    lng: eventsLongitude[2],
+    title: "Event 3",
+  };
 
-    // Marker for Event 1
-    var markerEvent1 = new google.maps.Marker({
-        position: event1location,
-        map: map
-    });
+  // Marker for Event 1
+  var markerEvent1 = new google.maps.Marker({
+    position: event1location,
+    map: map
+  });
 
-    var contentString1 = '<div id="content">'+
-    '<div id="siteNotice">'+
-    '</div>'+
-    '<h6 id="firstHeading" class="firstHeading">'+ titleEvent1 +'</h6>'
+  var contentString1 = '<div id="content">' +
+    '<div id="siteNotice">' +
+    '</div>' +
+    '<h6 id="firstHeading" class="firstHeading">' + titleEvent1 + '</h6>'
 
-    var infowindow1 = new google.maps.InfoWindow({
-        content: contentString1
-    });
+  var infowindow1 = new google.maps.InfoWindow({
+    content: contentString1
+  });
 
-    markerEvent1.addListener('click', function() {
-        infowindow1.open(map, markerEvent1);
-    });
+  markerEvent1.addListener('click', function () {
+    infowindow1.open(map, markerEvent1);
+  });
 
-    // Marker for Event 2
-    var markerEvent2 = new google.maps.Marker({
-        position: event2location,
-        map: map
-    });
+  // Marker for Event 2
+  var markerEvent2 = new google.maps.Marker({
+    position: event2location,
+    map: map
+  });
 
-    var contentString2 = '<div id="content">'+
-    '<div id="siteNotice">'+
-    '</div>'+
-    '<h6 id="firstHeading" class="firstHeading">'+ titleEvent2 +'</h6>'
+  var contentString2 = '<div id="content">' +
+    '<div id="siteNotice">' +
+    '</div>' +
+    '<h6 id="firstHeading" class="firstHeading">' + titleEvent2 + '</h6>'
 
-    var infowindow2 = new google.maps.InfoWindow({
-        content: contentString2
-    });
+  var infowindow2 = new google.maps.InfoWindow({
+    content: contentString2
+  });
 
-    markerEvent2.addListener('click', function() {
-        infowindow2.open(map, markerEvent2);
-    });
+  markerEvent2.addListener('click', function () {
+    infowindow2.open(map, markerEvent2);
+  });
 
-    // Marker for Event 3
-    var markerEvent3 = new google.maps.Marker({
-        position: event3location,
-        map: map
-    });
+  // Marker for Event 3
+  var markerEvent3 = new google.maps.Marker({
+    position: event3location,
+    map: map
+  });
 
-    var contentString3 = '<div id="content">'+
-    '<div id="siteNotice">'+
-    '</div>'+
-    '<h6 id="firstHeading" class="firstHeading">'+ titleEvent3 +'</h6>'
+  var contentString3 = '<div id="content">' +
+    '<div id="siteNotice">' +
+    '</div>' +
+    '<h6 id="firstHeading" class="firstHeading">' + titleEvent3 + '</h6>'
 
-    var infowindow3 = new google.maps.InfoWindow({
-        content: contentString3
-    });
+  var infowindow3 = new google.maps.InfoWindow({
+    content: contentString3
+  });
 
-    markerEvent3.addListener('click', function() {
-        infowindow3.open(map, markerEvent3);
-    });
+  markerEvent3.addListener('click', function () {
+    infowindow3.open(map, markerEvent3);
+  });
 
 }
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-    directionsService.route({
-      origin: document.getElementById('start').value,
-      destination: document.getElementById('end').value,
-      travelMode: 'DRIVING'
-    }, function(response, status) {
-      if (status === 'OK') {
-        directionsDisplay.setDirections(response);
-      } else {
-        window.alert('Directions request failed due to ' + status);
-      }
-    });
+  directionsService.route({
+    origin: document.getElementById('start').value,
+    destination: document.getElementById('end').value,
+    travelMode: 'DRIVING'
+  }, function (response, status) {
+    if (status === 'OK') {
+      directionsDisplay.setDirections(response);
+    } else {
+      window.alert('Directions request failed due to ' + status);
+    }
+  });
 
 }
 
@@ -444,20 +455,86 @@ function hotels(city, arrivalDate, leaveDate) {
 
       var hotel = $("<a>")
         .attr("class", "collection-item")
-        .attr("id", i)
-        .attr("href", "#")
+        .attr("id", "hotel")
+        .attr("href", "#1")
+        .attr("data", finalRate)
         .text(hotelName + " $" + finalRate);
 
       // Creating an image tag
       var pricetag = $("<span>")
         .attr("class", "new badge")
         .attr("data-badge-caption", " ")
+        .attr("data", finalRate)
         .text("$" + finalRate);
 
       //$("#").append(pricetag);
-      $(".collection").append(hotel);
+      $("#hotelsArea").append(hotel);
 
     };
     console.log(hotelsObject);
+    hotelCost1 = response.hotelResultSet[0].min_rate.amount * 0.067;
   });
 }
+
+
+
+
+
+$(document).on("click", "#hotel", function () {
+
+  var casetas = $("<a>")
+    .attr("class", "collection-item")
+    .attr("id", "caseta")
+    .attr("href", "#1")
+    .text("Costo de Casetas: " + "$" + responseInegi.data.costo_caseta);
+
+  $("#finalArea").append(casetas);
+
+  // var kilometros = $("<a>")
+  //   .attr("class", "collection-item")
+  //   .attr("id", "kilometros")
+  //   .attr("href", "#1")
+  //   .text("Kilómetros Totales: " + responseInegi.data.long_km);
+
+  // $("#finalArea").append(kilometros);
+
+  var kmpl = 10.54356;
+  var costoCombustible = 19.65;
+  var dato = responseInegi.data.long_km / kmpl * costoCombustible;
+  var datoFinal = dato.toFixed(2);
+
+  var combustible = $("<a>")
+    .attr("class", "collection-item")
+    .attr("id", "combustible")
+    .attr("href", "#1")
+    .text("Costo de Combustible: " + "$" + datoFinal);
+
+  $("#finalArea").append(combustible);
+
+  var amountOfPeople = $('#people-traveling').find(":selected").attr("value");
+
+  peopleEvent = eventCost * amountOfPeople;
+
+  var totalevent = $("<a>")
+    .attr("class", "collection-item")
+    .attr("id", "costoevento")
+    .attr("href", "#1")
+    .text("Costo de Boletos: " + "$" + peopleEvent);
+
+  $("#finalArea").append(totalevent);
+
+  var hotel2 = hotelCost1.toFixed(2);
+  console.log(hotel2);
+
+  var selecthotel = $("<a>")
+    .attr("class", "collection-item")
+    .attr("id", "costohoteles")
+    .attr("href", "#1")
+    .text("Costo de Hotel: " + "$" + hotel2);
+
+  $("#finalArea").append(selecthotel);
+
+  var costodetodo = responseInegi.data.costo_caseta + datoFinal + peopleEvent + hotel2;
+  console.log(costodetodo);
+
+});
