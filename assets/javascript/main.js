@@ -30,6 +30,10 @@ var queryURL =
   responseSize +
   "&sort=date,asc";
 
+var titleEvent1 = ""
+var titleEvent2 = ""
+var titleEvent3 = ""
+
 function start() {
   $.ajax({
     url: queryURL,
@@ -51,6 +55,7 @@ function start() {
 
     $("#event1image").attr("src", defaultEvents[0].images[0].url);
     $(".event1title").text(defaultEvents[0].name);
+
     $("#event1description").text(defaultEvents[0].info);
     $(".event1venue").text(
       defaultEvents[0]._embedded.venues[0].name +
@@ -90,6 +95,7 @@ function start() {
     $(".event3price").text(
       "Ticket price (min): $" + defaultEvents[2].priceRanges[0].min + " MXN"
     );
+
 
     for (let i = 0; i < defaultEvents.length; i++) {
       defaultEventsLatitude = parseFloat(
@@ -164,55 +170,124 @@ function fuel() {
 
 // Function to initialize and add the map
 function initMap() {
-  // The location of the center of Mexico
-  var mexico = {
-    lat: 23.6345,
-    lng: -102.5528
-  };
 
-  // The three default event markers, empty by default.
 
-  var event1location = {
-    lat: eventsLatitude[0],
-    lng: eventsLongitude[0],
-    title: "Event 1"
-  };
+    var directionsService = new google.maps.DirectionsService;
+    var directionsDisplay = new google.maps.DirectionsRenderer;
 
-  var event2location = {
-    lat: eventsLatitude[1],
-    lng: eventsLongitude[1],
-    title: "Event 2"
-  };
+    // The location of the center of Mexico
+    var mexico = {
+        lat: 23.6345,
+        lng: -102.5528,
+    };
 
-  var event3location = {
-    lat: eventsLatitude[2],
-    lng: eventsLongitude[2],
-    title: "Event 3"
-  };
+    // The map, centered at Mexico
+    var map = new google.maps.Map(
+        document.getElementById('map'), {
+            zoom: 5,
+            center: mexico
+    });
 
-  // The map, centered at Mexico
-  var map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 5,
-    center: mexico
-  });
+    directionsDisplay.setMap(map);
 
-  // Marker for Event 1
-  var markerEvent1 = new google.maps.Marker({
-    position: event1location,
-    map: map
-  });
+    var onChangeHandler = function() {
+        calculateAndDisplayRoute(directionsService, directionsDisplay);
+      };
+      document.getElementById('start').addEventListener('change', onChangeHandler);
+      document.getElementById('end').addEventListener('change', onChangeHandler);
 
-  // Marker for Event 2
-  var markerEvent2 = new google.maps.Marker({
-    position: event2location,
-    map: map
-  });
+    // The three default event markers, empty by default.
 
-  // Marker for Event 3
-  var markerEvent3 = new google.maps.Marker({
-    position: event3location,
-    map: map
-  });
+    var event1location = {
+        lat: eventsLatitude[0],
+        lng: eventsLongitude[0],
+        title: "Event 1",
+    };
+
+    var event2location = {
+        lat: eventsLatitude[1],
+        lng: eventsLongitude[1],
+        title: "Event 2",
+    };
+
+    var event3location = {
+        lat: eventsLatitude[2],
+        lng: eventsLongitude[2],
+        title: "Event 3",
+    };
+
+    // Marker for Event 1
+    var markerEvent1 = new google.maps.Marker({
+        position: event1location,
+        map: map
+    });
+
+    var contentString1 = '<div id="content">'+
+    '<div id="siteNotice">'+
+    '</div>'+
+    '<h6 id="firstHeading" class="firstHeading">'+ titleEvent1 +'</h6>'
+
+    var infowindow1 = new google.maps.InfoWindow({
+        content: contentString1
+    });
+
+    markerEvent1.addListener('click', function() {
+        infowindow1.open(map, markerEvent1);
+    });
+
+    // Marker for Event 2
+    var markerEvent2 = new google.maps.Marker({
+        position: event2location,
+        map: map
+    });
+
+    var contentString2 = '<div id="content">'+
+    '<div id="siteNotice">'+
+    '</div>'+
+    '<h6 id="firstHeading" class="firstHeading">'+ titleEvent2 +'</h6>'
+
+    var infowindow2 = new google.maps.InfoWindow({
+        content: contentString2
+    });
+
+    markerEvent2.addListener('click', function() {
+        infowindow2.open(map, markerEvent2);
+    });
+
+    // Marker for Event 3
+    var markerEvent3 = new google.maps.Marker({
+        position: event3location,
+        map: map
+    });
+
+    var contentString3 = '<div id="content">'+
+    '<div id="siteNotice">'+
+    '</div>'+
+    '<h6 id="firstHeading" class="firstHeading">'+ titleEvent3 +'</h6>'
+
+    var infowindow3 = new google.maps.InfoWindow({
+        content: contentString3
+    });
+
+    markerEvent3.addListener('click', function() {
+        infowindow3.open(map, markerEvent3);
+    });
+
+}
+
+function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+    directionsService.route({
+      origin: document.getElementById('start').value,
+      destination: document.getElementById('end').value,
+      travelMode: 'DRIVING'
+    }, function(response, status) {
+      if (status === 'OK') {
+        directionsDisplay.setDirections(response);
+      } else {
+        window.alert('Directions request failed due to ' + status);
+      }
+    });
+
 }
 
 function displayRoute() {
