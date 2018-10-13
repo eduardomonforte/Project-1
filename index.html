@@ -5,14 +5,13 @@
     <title>Roadtrip MX</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
-    <link href="assets/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
-    <link href="assets/css/style.css" type="text/css" rel="stylesheet" >
-
+    <link href="assets/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="assets/css/style.css" type="text/css" rel="stylesheet">
 </head>
 
 <body>
@@ -59,10 +58,9 @@
                 <h5>Select your desired destination and event date:</h5>
                 <div class="input-field col s12 m6 l6">
                     <select>
-                        <option value="" selected>Mexico</option>
-                        <option value="NL">Monterrey</option>
-                        <option value="JAL">Guadalajara</option>
-                        <option value="DF">CDMX</option>
+                        <option id="MEX" value="DF">Ciudad de Mexico</option>
+                        <option id="GDL" value="JAL">Jalisco</option>
+                        <option id="MTY" value="NL">Nuevo Leon</option>
                     </select>
                     <label>Place</label>
                 </div>
@@ -79,6 +77,7 @@
                 </div>
             </div>
         </div>
+        <br>
 
         <!--DIV Element for the Map -->
         <div class="container">
