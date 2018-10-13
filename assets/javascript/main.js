@@ -486,7 +486,7 @@ $(document).on("click", "#hotel", function () {
     .attr("class", "collection-item")
     .attr("id", "caseta")
     .attr("href", "#1")
-    .text("Costo de Casetas: " + "$" + responseInegi.data.costo_caseta);
+    .text("Toll Costs: " + "$" + responseInegi.data.costo_caseta);
 
   $("#finalArea").append(casetas);
 
@@ -507,7 +507,7 @@ $(document).on("click", "#hotel", function () {
     .attr("class", "collection-item")
     .attr("id", "combustible")
     .attr("href", "#1")
-    .text("Costo de Combustible: " + "$" + datoFinal);
+    .text("Fuel Cost: " + "$" + datoFinal);
 
   $("#finalArea").append(combustible);
 
@@ -519,7 +519,7 @@ $(document).on("click", "#hotel", function () {
     .attr("class", "collection-item")
     .attr("id", "costoevento")
     .attr("href", "#1")
-    .text("Costo de Boletos: " + "$" + peopleEvent);
+    .text("Ticket Cost: " + "$" + peopleEvent);
 
   $("#finalArea").append(totalevent);
 
@@ -530,11 +530,32 @@ $(document).on("click", "#hotel", function () {
     .attr("class", "collection-item")
     .attr("id", "costohoteles")
     .attr("href", "#1")
-    .text("Costo de Hotel: " + "$" + hotel2);
+    .text("Hotel Cost: " + "$" + hotel2);
 
   $("#finalArea").append(selecthotel);
 
-  var costodetodo = responseInegi.data.costo_caseta + datoFinal + peopleEvent + hotel2;
+  var costodetodo = parseInt(responseInegi.data.costo_caseta, 10) + parseInt(datoFinal, 10) + parseInt(peopleEvent, 10) + parseInt(hotel2, 10);
   console.log(costodetodo);
+
+  var totalCost = $("<a>")
+    .attr("class", "collection-item")
+    .attr("id", "costohoteles")
+    .attr("href", "#1")
+    .text("Total Cost: " + "$" + costodetodo);
+
+  $("#finalArea").append(totalCost);
+
+  var convert = costodetodo.toString();
+  var revert = parseInt(convert, 10);
+
+  var personExpense = revert / amountOfPeople;
+
+  var personCost = $("<a>")
+    .attr("class", "collection-item")
+    .attr("id", "costohoteles")
+    .attr("href", "#1")
+    .text("Cost per Person: " + "$" + personExpense);
+
+  $("#finalArea").append(personCost);
 
 });
