@@ -140,16 +140,18 @@
             </div>
             <div class="row">
                 <div class="input-field col s12 m6 l6">
-                    <input type="text" class="datepicker" placeholder="Pick a Date">
+                    <input id="travel-date" type="text" class="datepicker" placeholder="Pick a Date">
                     <label>When will you be traveling?</label>
                 </div>
                 <div class="input-field col s12 m6 l6">
-                    <select>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
+
+                    <select id="people-traveling">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+
                     </select>
                     <label>How many people are traveling?</label>
                 </div>
@@ -291,7 +293,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="assets/javascript/materialize.js"></script>
-<!-- -->
+<!-- Moment.js -->
+<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+<!-- Animations and extra stuff from Materialize -->
 <script src="assets/javascript/init.js"></script>
 <!-- Initialize Firebase -->
 <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase.js"></script>

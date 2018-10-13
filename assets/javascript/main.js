@@ -14,6 +14,74 @@ var city = "";
 var startTrip = 0;
 var endTrip = 0;
 
+// MOMENT.JS TEST
+
+//var inputDate = ""
+//var inputFormat = "MMM DD, YYYY"
+//var convertedDate = moment(inputDate, inputFormat);
+//console.log(moment(convertedDate).format("YYYY/MM/DD"));
+
+// VALUES STORING
+
+var ticketmasterDate = ""
+var stateCode = "DF"
+
+$("#add-user").on("click", function() {
+    var startLocation = $("#start").val();
+    alert(startLocation);
+    var endLocation = $("#end").val();
+    alert(endLocation);
+    var inputDate = $("#travel-date").val();
+    alert(inputDate);
+    var inputFormat = "MMM DD, YYYY"
+    var convertedDate = moment(inputDate, inputFormat);
+    var tempTicketmasterDate = moment(convertedDate).format("YYYY-MM-DD");
+    console.log(tempTicketmasterDate);
+    ticketmasterDate = tempTicketmasterDate;
+    var formattedDate = tempTicketmasterDate.replace(/-/g, '/');
+    console.log(formattedDate);
+    var peopleTraveling = $("#people-traveling").val();
+    alert(peopleTraveling);
+
+    searchTicketmaster();
+})
+
+function searchTicketmaster() {
+    var responseSize = (20).toString();
+    var apiKey = "8qqzR9xAATp2Wyh7mCELVegociPYsEVT";
+
+    var queryURL2 =
+    "https://app.ticketmaster.com/discovery/v2/events.json?apikey=" +
+    apiKey +
+    "&countryCode=MX&size=" +
+    responseSize +
+    "&sort=date,asc" +
+    "&startDateTime=" +
+    ticketmasterDate +
+    "T00:00:00Z"; +
+    "&stateCode=" +
+    stateCode;
+
+  $.ajax({
+    url: queryURL2,
+    method: "GET"
+  }).then(function (response2) {
+    let defaultEvents = [];
+    let tempEvent = response2._embedded.events;
+    console.log(tempEvent)
+
+    for (let i = 0; i < tempEvent.length; i++) {
+      if (
+        tempEvent[i]._embedded.venues[0].location !== undefined &&
+        tempEvent[i].info !== undefined
+      ) {
+        defaultEvents.push(tempEvent[i]);
+      }
+    }
+  })
+
+}
+
 // Coordinate Arrays, to be populated by the Ticketmaster Discovery API
 var eventsLatitude = [];
 var eventsLongitude = [];
@@ -55,7 +123,7 @@ function start() {
 
     $("#event1image").attr("src", defaultEvents[0].images[0].url);
     $(".event1title").text(defaultEvents[0].name);
-
+    titleEvent1 = defaultEvents[0].name;
     $("#event1description").text(defaultEvents[0].info);
     $(".event1venue").text(
       defaultEvents[0]._embedded.venues[0].name +
@@ -70,6 +138,7 @@ function start() {
 
     $("#event2image").attr("src", defaultEvents[1].images[0].url);
     $(".event2title").text(defaultEvents[1].name);
+    titleEvent2 = defaultEvents[1].name;
     $("#event2description").text(defaultEvents[1].info);
     $(".event2venue").text(
       defaultEvents[1]._embedded.venues[0].name +
@@ -84,6 +153,7 @@ function start() {
 
     $("#event3image").attr("src", defaultEvents[2].images[0].url);
     $(".event3title").text(defaultEvents[2].name);
+    titleEvent3 = defaultEvents[2].name;
     $("#event3description").text(defaultEvents[2].info);
     $(".event3venue").text(
       defaultEvents[2]._embedded.venues[0].name +
