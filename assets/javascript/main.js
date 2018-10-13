@@ -20,7 +20,7 @@ var eventsLongitude = [];
 
 // TICKETMASTER DISCOVERY API
 
-var responseSize = (3).toString();
+var responseSize = (20).toString();
 var apiKey = "8qqzR9xAATp2Wyh7mCELVegociPYsEVT";
 
 var queryURL =
@@ -34,24 +34,64 @@ function start() {
   $.ajax({
     url: queryURL,
     method: "GET"
-  }).then(function (response) {
-    var defaultEvents = response._embedded.events;
+  }).then(function(response) {
+    var defaultEvents = [];
+    var tempEvent = response._embedded.events;
+
+    for (let i = 0; i < tempEvent.length; i++) {
+      if (
+        tempEvent[i]._embedded.venues[0].location !== undefined &&
+        tempEvent[i].info !== undefined
+      ) {
+        defaultEvents.push(tempEvent[i]);
+      }
+    }
 
     console.log(defaultEvents);
 
     $("#event1image").attr("src", defaultEvents[0].images[0].url);
-    $("#event1title").text(defaultEvents[0].name);
+    $(".event1title").text(defaultEvents[0].name);
     $("#event1description").text(defaultEvents[0].info);
+    $(".event1venue").text(
+      defaultEvents[0]._embedded.venues[0].name +
+        " - " +
+        defaultEvents[0]._embedded.venues[0].city.name +
+        ", " +
+        defaultEvents[0]._embedded.venues[0].country.name
+    );
+    $(".event1price").text(
+      "Ticket price (min): $" + defaultEvents[0].priceRanges[0].min + " MXN"
+    );
 
     $("#event2image").attr("src", defaultEvents[1].images[0].url);
-    $("#event2title").text(defaultEvents[1].name);
+    $(".event2title").text(defaultEvents[1].name);
     $("#event2description").text(defaultEvents[1].info);
+    $(".event2venue").text(
+      defaultEvents[1]._embedded.venues[0].name +
+        " - " +
+        defaultEvents[1]._embedded.venues[0].city.name +
+        ", " +
+        defaultEvents[1]._embedded.venues[0].country.name
+    );
+    $(".event2price").text(
+      "Ticket price (min): $" + defaultEvents[1].priceRanges[0].min + " MXN"
+    );
 
     $("#event3image").attr("src", defaultEvents[2].images[0].url);
-    $("#event3title").text(defaultEvents[2].name);
+    $(".event3title").text(defaultEvents[2].name);
     $("#event3description").text(defaultEvents[2].info);
+    $(".event3venue").text(
+      defaultEvents[2]._embedded.venues[0].name +
+        " - " +
+        defaultEvents[2]._embedded.venues[0].city.name +
+        ", " +
+        defaultEvents[2]._embedded.venues[0].country.name
+    );
+    $(".event3price").text(
+      "Ticket price (min): $" + defaultEvents[2].priceRanges[0].min + " MXN"
+    );
 
-    for (i = 0; i < defaultEvents.length; i++) {
+    for (let i = 0; i < defaultEvents.length; i++) {
       defaultEventsLatitude = parseFloat(
         defaultEvents[i]._embedded.venues[0].location.latitude
       );
@@ -78,7 +118,7 @@ function journeyStart(city) {
       num: 5,
       key: "rZMkTZuI-ugbU-t1Y5-zCHg-0ZOETYT3r0HG"
     }
-  }).done(function (response) {
+  }).done(function(response) {
     console.log(response);
   });
 }
@@ -102,7 +142,7 @@ function routes(startTrip, endTrip) {
       type: "json",
       proj: "GRS80"
     }
-  }).done(function (response) {
+  }).done(function(response) {
     console.log(response);
   });
 }
@@ -117,7 +157,7 @@ function fuel() {
       type: "json",
       proj: "GRS80"
     }
-  }).done(function (response) {
+  }).done(function(response) {
     console.log(response);
   });
 }
