@@ -374,39 +374,39 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 
 }
 
-function displayRoute() {
-  // The location of Mexico
-  var mexico = {
-    lat: 19.3390515900001,
-    lng: -99.06427109
+// function displayRoute() {
+//   // The location of Mexico
+//   var mexico = {
+//     lat: 19.3390515900001,
+//     lng: -99.06427109
 
-    //23.368116,
-    //-102.268791
-  };
+//     //23.368116,
+//     //-102.268791
+//   };
 
-  var mexico2 = {
-    lat: 20.3390515900001,
-    lng: -102.06427109
+//   var mexico2 = {
+//     lat: 20.3390515900001,
+//     lng: -102.06427109
 
-    //23.368116,
-    //-102.268791
-  };
-  // The map, centered at Mexico
-  var map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 5,
-    center: mexico
-  });
-  // The marker, positioned at Mexico
-  var marker = new google.maps.Marker({
-    position: mexico,
-    map: map
-  });
+//     //23.368116,
+//     //-102.268791
+//   };
+//   // The map, centered at Mexico
+//   var map = new google.maps.Map(document.getElementById("map"), {
+//     zoom: 5,
+//     center: mexico
+//   });
+//   // The marker, positioned at Mexico
+//   var marker = new google.maps.Marker({
+//     position: mexico,
+//     map: map
+//   });
 
-  var marker2 = new google.maps.Marker({
-    position: mexico2,
-    map: map
-  });
-}
+//   var marker2 = new google.maps.Marker({
+//     position: mexico2,
+//     map: map
+//   });
+// }
 
 // function hotels() {
 //   $.ajax({
