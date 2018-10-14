@@ -65,9 +65,11 @@ function searchTicketmaster() {
     "&sort=date,asc" +
     "&startDateTime=" +
     ticketmasterDate +
-    "T00:00:00Z"; +
+    "T00:00:00Z" +
   "&stateCode=" +
   stateCode;
+
+    console.log(queryURL2);
 
   $.ajax({
     url: queryURL2,
@@ -85,6 +87,7 @@ function searchTicketmaster() {
         defaultEvents.push(tempEvent[i]);
       }
     }
+    console.log(defaultEvents);
   })
 
 }
@@ -194,7 +197,7 @@ function start() {
 // Function to determine the place and INEGI code for the routing function
 function journeyStart(city) {
   $.ajax({
-    url: "http://gaia.inegi.org.mx/sakbe_v3.1/buscadestino",
+    url: "https://pacific-wave-84052.herokuapp.com/buscadestino",
     method: "POST",
     data: {
       buscar: city,
@@ -211,7 +214,7 @@ function journeyStart(city) {
 // Function to determine the complete route, km, toll cost, etc.
 function routes(startTrip, endTrip) {
   $.ajax({
-    url: "http://gaia.inegi.org.mx/sakbe_v3.1/cuota",
+    url: "https://pacific-wave-84052.herokuapp.com/cuota",
     method: "POST",
     data: {
       key: "rZMkTZuI-ugbU-t1Y5-zCHg-0ZOETYT3r0HG",
@@ -237,7 +240,7 @@ function routes(startTrip, endTrip) {
 // Function to determine fuel costs
 function fuel() {
   $.ajax({
-    url: "http://gaia.inegi.org.mx/sakbe_v3.1/combustible",
+    url: "https://pacific-wave-84052.herokuapp.com/combustible",
     method: "POST",
     data: {
       key: "rZMkTZuI-ugbU-t1Y5-zCHg-0ZOETYT3r0HG",
@@ -371,39 +374,39 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 
 }
 
-function displayRoute() {
-  // The location of Mexico
-  var mexico = {
-    lat: 19.3390515900001,
-    lng: -99.06427109
+// function displayRoute() {
+//   // The location of Mexico
+//   var mexico = {
+//     lat: 19.3390515900001,
+//     lng: -99.06427109
 
-    //23.368116,
-    //-102.268791
-  };
+//     //23.368116,
+//     //-102.268791
+//   };
 
-  var mexico2 = {
-    lat: 20.3390515900001,
-    lng: -102.06427109
+//   var mexico2 = {
+//     lat: 20.3390515900001,
+//     lng: -102.06427109
 
-    //23.368116,
-    //-102.268791
-  };
-  // The map, centered at Mexico
-  var map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 5,
-    center: mexico
-  });
-  // The marker, positioned at Mexico
-  var marker = new google.maps.Marker({
-    position: mexico,
-    map: map
-  });
+//     //23.368116,
+//     //-102.268791
+//   };
+//   // The map, centered at Mexico
+//   var map = new google.maps.Map(document.getElementById("map"), {
+//     zoom: 5,
+//     center: mexico
+//   });
+//   // The marker, positioned at Mexico
+//   var marker = new google.maps.Marker({
+//     position: mexico,
+//     map: map
+//   });
 
-  var marker2 = new google.maps.Marker({
-    position: mexico2,
-    map: map
-  });
-}
+//   var marker2 = new google.maps.Marker({
+//     position: mexico2,
+//     map: map
+//   });
+// }
 
 // function hotels() {
 //   $.ajax({
