@@ -218,8 +218,8 @@ function routes(startTrip, endTrip) {
     method: "POST",
     data: {
       key: "rZMkTZuI-ugbU-t1Y5-zCHg-0ZOETYT3r0HG",
-      dest_i: startTrip,
-      dest_f: endTrip,
+      startTrip: startTrip,
+      endTrip: endTrip,
       // id_i: 1,
       // source_i: 254,
       // target_i: 255,
