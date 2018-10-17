@@ -5023,13 +5023,23 @@ small {
   overflow: hidden !important;
 }
 
+#selected-column {
+  height: 385px !important;
+  overflow: hidden !important;
+}
+
+#temp-card {
+  height: 375px !important;
+  overflow: hidden !important;  
+}
+
 #hotelsArea {
-  height: 380px !important;
+  height: 375px !important;
   overflow: hidden !important;
 }
 
 #finalArea {
-  height: 380px !important;
+  height: 375px !important;
   overflow: hidden !important;
 }
 

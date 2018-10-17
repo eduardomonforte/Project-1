@@ -10,7 +10,8 @@ $(document).ready(function () {
 
       console.log("Click registered.");
       $(".btn-floating").hide();
-      $("#events-section").css("opacity", "0.5");
+      $("#temp-card").hide();
+      $("#events-section").css("opacity", "0.3");
       var selectedCard = $(this).closest('.card').clone(true);
       $("#selected-column").append(selectedCard);
 
