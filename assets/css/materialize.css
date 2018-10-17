@@ -5016,7 +5016,7 @@ small {
   overflow: hidden;
 }
 
-/* ADDED BY THE TEAM */
+/* CUSTOM RULES BY THE TEAM START HERE */
 
 .card-content {
   height: 200px !important;
@@ -5030,7 +5030,7 @@ small {
 
 #temp-card {
   height: 375px !important;
-  overflow: hidden !important;  
+  overflow: hidden !important;
 }
 
 #hotelsArea {
@@ -5043,6 +5043,7 @@ small {
   overflow: hidden !important;
 }
 
+/* CUSTOM RULES BY THE TEAM END HERE */
 
 .card.small .card-action,
 .card.medium .card-action,
