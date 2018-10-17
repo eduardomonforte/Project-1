@@ -489,7 +489,7 @@ $(document).on("click", "#hotel", function () {
     .attr("class", "collection-item")
     .attr("id", "caseta")
     .attr("href", "#1")
-    .text("Toll Costs: " + "$" + responseInegi.data.costo_caseta);
+    .text("Toll Costs: " + "$" + responseInegi.costo_caseta);
 
   $("#finalArea").append(casetas);
 
@@ -497,13 +497,13 @@ $(document).on("click", "#hotel", function () {
   //   .attr("class", "collection-item")
   //   .attr("id", "kilometros")
   //   .attr("href", "#1")
-  //   .text("Kilómetros Totales: " + responseInegi.data.long_km);
+  //   .text("Kilómetros Totales: " + responseInegi.long_km);
 
   // $("#finalArea").append(kilometros);
 
   var kmpl = 10.54356;
   var costoCombustible = 19.65;
-  var dato = responseInegi.data.long_km / kmpl * costoCombustible;
+  var dato = responseInegi.long_km / kmpl * costoCombustible;
   var datoFinal = dato.toFixed(2);
 
   var combustible = $("<a>")
@@ -537,7 +537,7 @@ $(document).on("click", "#hotel", function () {
 
   $("#finalArea").append(selecthotel);
 
-  var costodetodo = parseInt(responseInegi.data.costo_caseta, 10) + parseInt(datoFinal, 10) + parseInt(peopleEvent, 10) + parseInt(hotel2, 10);
+  var costodetodo = parseInt(responseInegi.costo_caseta, 10) + parseInt(datoFinal, 10) + parseInt(peopleEvent, 10) + parseInt(hotel2, 10);
   console.log(costodetodo);
 
   var totalCost = $("<a>")
